@@ -1,5 +1,5 @@
 import { createStore, createEvent } from "effector";
-import { Product, CartItem } from "./types/types";
+import { Product, CartItem } from "./types";
 
 const addToCart = createEvent<CartItem>();
 const removeFromCart = createEvent<string>();
