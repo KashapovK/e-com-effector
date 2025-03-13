@@ -1,7 +1,7 @@
-import React from "react";
-import { store } from "./store"; // Импортируем store из Effector
-import "./css/product.css";
-import { CartItem } from "./types";
+import React from 'react';
+import { store } from './store'; // Импортируем store из Effector
+import './css/product.css';
+import { CartItem } from './types';
 
 interface ProductProps {
   product: CartItem;

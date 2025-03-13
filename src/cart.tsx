@@ -1,8 +1,8 @@
-import React from "react";
-import { useUnit } from "effector-react";
-import { store } from "./store";
-import "./css/cart.css";
-import { CartItem } from "./types";
+import React from 'react';
+import { useUnit } from 'effector-react';
+import { store } from './store';
+import './css/cart.css';
+import { CartItem } from './types';
 
 const Cart: React.FC = () => {
   const cart = useUnit(store.$cart);
