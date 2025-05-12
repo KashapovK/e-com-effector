@@ -1,3 +1,4 @@
+import { assert } from 'chai';
 import { createEvent } from 'effector';
 import { store } from '../src/store';
 import { CartItem, Product } from '../src/types';
@@ -16,7 +17,7 @@ describe('Функционал Effector стора', () => {
 
     store.setProducts(products);
 
-    expect(store.$products.getState()).toEqual(products);
+    assert.deepEqual(store.$products.getState(), products);
   });
 
   test('addToCart добавляет товар в корзину', () => {
@@ -29,7 +30,7 @@ describe('Функционал Effector стора', () => {
 
     store.addToCart(product);
 
-    expect(store.$cart.getState()).toEqual([{ ...product, quantity: 1 }]);
+    assert.deepEqual(store.$cart.getState(), [{ ...product, quantity: 1 }]);
   });
 
   test('addToCart увеличивает количество, если товар уже есть в корзине', () => {
@@ -43,7 +44,7 @@ describe('Функционал Effector стора', () => {
     store.addToCart(product);
     store.addToCart(product);
 
-    expect(store.$cart.getState()[0].quantity).toBe(2);
+    assert.equal(store.$cart.getState()[0].quantity, 2);
   });
 
   test('increaseQuantity увеличивает количество товара', () => {
@@ -57,7 +58,7 @@ describe('Функционал Effector стора', () => {
     store.addToCart(product);
     store.increaseQuantity(product.id);
 
-    expect(store.$cart.getState()[0].quantity).toBe(2);
+    assert.equal(store.$cart.getState()[0].quantity, 2);
   });
 
   test('decreaseQuantity уменьшает количество товара', () => {
@@ -72,7 +73,7 @@ describe('Функционал Effector стора', () => {
     store.increaseQuantity(product.id);
     store.decreaseQuantity(product.id);
 
-    expect(store.$cart.getState()[0].quantity).toBe(1);
+    assert.equal(store.$cart.getState()[0].quantity, 1);
   });
 
   test('decreaseQuantity не уменьшает количество ниже 1', () => {
@@ -87,7 +88,7 @@ describe('Функционал Effector стора', () => {
     store.decreaseQuantity(product.id);
     store.decreaseQuantity(product.id);
 
-    expect(store.$cart.getState()[0].quantity).toBe(1);
+    assert.equal(store.$cart.getState()[0].quantity, 1);
   });
 
   test('removeFromCart удаляет товар из корзины', () => {
@@ -101,6 +102,6 @@ describe('Функционал Effector стора', () => {
     store.addToCart(product);
     store.removeFromCart(product.id);
 
-    expect(store.$cart.getState()).toEqual([]);
+    assert.deepEqual(store.$cart.getState(), []);
   });
 });

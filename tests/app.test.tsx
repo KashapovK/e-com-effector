@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
+import { assert } from 'chai';
 import App from '../src/app';
 import { fork, allSettled } from 'effector';
 import { store } from '../src/store';
@@ -22,12 +23,11 @@ describe('App Component', () => {
       </Provider>,
     );
 
-    expect(screen.getByText(/Интернет-магазин/i)).toBeInTheDocument();
+    assert.exists(screen.getByText(/Интернет-магазин/i));
 
     await waitFor(() => {
-      expect(screen.getAllByText(/Добавить в корзину/i).length).toBeGreaterThan(
-        0,
-      );
+      const buttons = screen.getAllByText(/Добавить в корзину/i);
+      assert.isAbove(buttons.length, 0);
     });
   });
 });
